@@ -60,11 +60,14 @@
 (defn fewest-cubes
   "Find the fewest number of cubes of each color for a sequence of draws"
   [draw-seq]
-  (for [color '("red" "green" "blue")]
-    (let [count-seq (map #(get color % -1) draw-seq)]
-      (println draw-seq)
-      (println count-seq)
-      count-seq
+  (let [colors '("red" "green" "blue")]
+    (zipmap
+      colors
+      (for [color colors]
+        (let [count-seq (map #(get % color -1) draw-seq)]
+          (apply max count-seq)
+          )
+        )
       )
     )
   )
