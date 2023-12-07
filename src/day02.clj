@@ -78,11 +78,14 @@
 (with-open [xin (clojure.java.io/reader (clojure.java.io/resource ifile))]
   (println
     (str "sum of valid ids: "
-         (apply +
-                (map first
-                     (filter #(game-possible? (second %) max-draw)
-                             (map parse-game (line-seq xin))
-                             )))))
+         (transduce (comp
+                      (map parse-game)
+                      (filter #(game-possible? (second %) max-draw))
+                      (map first))
+                    +
+                    (line-seq xin)
+                    )
+         ))
   )
 
 
