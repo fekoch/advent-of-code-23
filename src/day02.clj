@@ -72,6 +72,12 @@
     )
   )
 
+(defn power
+  "calculate the power of the set of cubes"
+  [map-of-cubes]
+  (apply * (filter pos? (vals map-of-cubes)))
+  )
+
 
 
 (def max-draw {"red" 12 "green" 13 "blue" 14})
@@ -89,5 +95,19 @@
   )
 
 
+(with-open [xin (clojure.java.io/reader (clojure.java.io/resource ifile))]
+  (println
+    (str "power of fewest cubes: "
+         (transduce (comp
+                      (map parse-game)
+                      (map second)
+                      (map fewest-cubes)
+                      (map power)
+                      )
+                    +
+                    (line-seq xin)
+                    )
+         ))
+  )
 
 
