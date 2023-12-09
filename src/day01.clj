@@ -28,9 +28,10 @@
   )
 
 
-(with-open
-  [xin (clojure.java.io/reader (clojure.java.io/resource ifile))]
-  (println
+(defn part-one []
+  "Part one of day one"
+  (with-open
+    [xin (clojure.java.io/reader (clojure.java.io/resource ifile))]
     (reduce +
             (map calib-value
                  (line-seq xin)
@@ -38,3 +39,5 @@
             )
     )
   )
+
+(println (str "Part One: " (part-one)))
