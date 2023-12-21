@@ -22,7 +22,7 @@
 (defn get
   "Get the value at index (specified by a vector)"
   [matrix index]
-  (select matrix (index 0) (index 1))
+  select (matrix (index 0) (index 1))
   )
 (for [index (index-seq file-matrix)]
   (do
