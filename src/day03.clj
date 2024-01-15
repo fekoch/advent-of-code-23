@@ -22,7 +22,7 @@
 (defn get
   "Get the value at index (specified by a vector)"
   [matrix index]
-  ((matrix (index 1)) (index 0))
+  select (matrix (index 0) (index 1))
   )
 
 (defn is-symbol?
